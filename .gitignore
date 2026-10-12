@@ -1,0 +1,17 @@
+node_modules/
+.next/
+*.tsbuildinfo
+out/
+*.log
+.env*
+!.env.example
+
+# Local/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Keep the original source-media archive outside Git and the browser bundle
+Images/
+Images/*.CR2
