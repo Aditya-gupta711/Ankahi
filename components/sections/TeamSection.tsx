@@ -6,6 +6,7 @@ type TeamMember = { id: string; name: string; role: string; bio?: string | null;
 function getCardRole(role: string) {
   if (role === "Directors") return "Director";
   if (role === "Panel Members") return "Panel Member";
+  if (role === "Representatives") return "Representative";
   return role;
 }
 
