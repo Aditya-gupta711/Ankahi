@@ -3,11 +3,17 @@ import { MemberIsland } from "@/components/ui/MemberIsland";
 
 type TeamMember = { id: string; name: string; role: string; bio?: string | null; photo?: { public_url?: string | null } | null };
 
+function getCardRole(role: string) {
+  if (role === "Directors") return "Director";
+  if (role === "Panel Members") return "Panel Member";
+  return role;
+}
+
 function TeamLevelSection({ level, members }: { level: TeamLevel; members: TeamMember[] }) {
   const cards = members;
   const layout = cards.length === 1 ? "grid-cols-1" : cards.length === 5 ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" : cards.length === 6 ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3" : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4";
   const gridWidth = cards.length === 6 ? "max-w-[48rem]" : "max-w-6xl";
-  return <section aria-labelledby={`${level.id}-title`}><div className="flex flex-col items-center"><h2 id={`${level.id}-title`} className="text-center font-display text-4xl leading-none sm:text-5xl">{level.title}</h2><span aria-hidden="true" className="mt-4 h-px w-16 bg-theatre-red" /></div>{cards.length ? <div className={`mx-auto mt-8 grid ${gridWidth} justify-items-center gap-12 ${layout}`}>{cards.map((member) => <MemberIsland key={member.id} member={{ id: member.id, name: member.name, role: member.role, bio: member.bio ?? undefined, photo: member.photo?.public_url ?? undefined }} />)}</div> : <p className="mx-auto mt-8 max-w-md text-center text-sm leading-6 text-ink/55">This roster will be announced soon.</p>}</section>;
+  return <section aria-labelledby={`${level.id}-title`}><div className="flex flex-col items-center"><h2 id={`${level.id}-title`} className="text-center font-display text-4xl leading-none sm:text-5xl">{level.title}</h2><span aria-hidden="true" className="mt-4 h-px w-16 bg-theatre-red" /></div>{cards.length ? <div className={`mx-auto mt-8 grid ${gridWidth} justify-items-center gap-12 ${layout}`}>{cards.map((member) => <MemberIsland key={member.id} member={{ id: member.id, name: member.name, role: getCardRole(member.role), bio: member.bio ?? undefined, photo: member.photo?.public_url ?? undefined }} />)}</div> : <p className="mx-auto mt-8 max-w-md text-center text-sm leading-6 text-ink/55">This roster will be announced soon.</p>}</section>;
 }
 
 export function TeamSection({ members = [] }: { members?: Array<{ id: string; name: string; role: string; bio?: string | null; photo?: { public_url?: string | null } | null }> }) {
