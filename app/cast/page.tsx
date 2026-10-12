@@ -28,7 +28,7 @@ async function getTeamMembers() {
     for (const file of files.filter((entry) => entry.isFile() && extensions.has(path.extname(entry.name).toLowerCase()))) {
       const baseName = path.basename(file.name, path.extname(file.name));
       const [name, ...hostelParts] = baseName.split("_");
-      members.push({ id: `${folder}-${file.name}`, name: name.replace(/[-]+/g, " "), role: level.title, bio: hostelParts.length ? `Hostel: ${hostelParts.join(" ").replace(/[-]+/g, " ")}` : undefined, photo: { public_url: `/images/team/${folder}/${encodeURIComponent(file.name)}` } });
+      members.push({ id: `${folder}-${file.name}`, name: name.replace(/[-]+/g, " "), role: level.title, bio: folder === "representatives" && hostelParts.length ? `Hostel: ${hostelParts.join(" ").replace(/[-]+/g, " ")}` : undefined, photo: { public_url: `/images/team/${folder}/${encodeURIComponent(file.name)}` } });
     }
   }
   return members;
