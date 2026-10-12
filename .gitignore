@@ -13,5 +13,5 @@ Thumbs.db
 .vscode/
 
 # Keep the original source-media archive outside Git and the browser bundle
-Images/
-Images/*.CR2
+/Images/
+/Images/*.CR2
