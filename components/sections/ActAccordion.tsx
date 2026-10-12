@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { actCategories } from "@/data/content/home";
 
-const actImages = ["/images/home/acts/street.png", "/images/home/acts/monoact.png", "/images/home/acts/mime.JPG", "/images/home/acts/stage.JPG"];
+const actImages = ["/images/home/acts/street.png", "/images/home/acts/monoact.png", "/images/home/acts/mime.jpg", "/images/home/acts/stage.JPG"];
 
 export function ActAccordion() {
   const [active, setActive] = useState<number | null>(null);
