@@ -9,9 +9,18 @@ export const dynamic = "force-dynamic";
 
 const extensions = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
 
+async function readDirectory(directory: string) {
+  try {
+    return await readdir(directory, { withFileTypes: true });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
+    throw error;
+  }
+}
+
 async function getCollectionImages() {
   const directory = path.join(process.cwd(), "public", "images", "collections");
-  const files = await readdir(directory, { withFileTypes: true });
+  const files = await readDirectory(directory);
   return files.filter((file) => file.isFile() && extensions.has(path.extname(file.name).toLowerCase())).sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true })).map((file) => ({ id: file.name, src: `/images/collections/${encodeURIComponent(file.name)}`, alt: path.basename(file.name, path.extname(file.name)).replace(/[-_]+/g, " ") }));
 }
 

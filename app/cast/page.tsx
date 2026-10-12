@@ -10,12 +10,21 @@ export const metadata = { title: "Team", description: "Meet the team behind Anka
 export const dynamic = "force-dynamic";
 const extensions = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
 
+async function readDirectory(directory: string) {
+  try {
+    return await readdir(directory, { withFileTypes: true });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
+    throw error;
+  }
+}
+
 async function getTeamMembers() {
   const root = path.join(process.cwd(), "public", "images", "team");
   const members = [];
   for (const level of teamLevels) {
     const folder = level.id;
-    const files = await readdir(path.join(root, folder), { withFileTypes: true });
+    const files = await readDirectory(path.join(root, folder));
     for (const file of files.filter((entry) => entry.isFile() && extensions.has(path.extname(entry.name).toLowerCase()))) {
       const baseName = path.basename(file.name, path.extname(file.name));
       const [name, ...hostelParts] = baseName.split("_");
