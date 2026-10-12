@@ -3,7 +3,7 @@ import type { MediaItem } from "@/types/content";
 export const heroSlides: MediaItem[] = [
   { id: "hero-stage", type: "image", category: "background", src: "/images/stage/1.JPG", alt: "Actors performing beneath a warm theatre curtain", width: 3936, height: 2216 },
   { id: "hero-arpiet", type: "image", category: "background", src: "/images/home/arpiet.png", alt: "Ankahi performers presenting Arpiet" },
-  { id: "hero-mime", type: "image", category: "background", src: "/images/stage/3.png", alt: "Two performers in mime makeup facing each other on stage", width: 1536, height: 1024 },
+  { id: "hero-madhav", type: "image", category: "background", src: "/images/home/madhav.png", alt: "Madhav performing with Ankahi" },
 ];
 
 export type ActCategory = {
