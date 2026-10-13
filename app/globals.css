@@ -102,6 +102,15 @@
 
 * { box-sizing: border-box; }
 
+/* Keep image-less event cards at the same fixed width as interactive cards. */
+.snap-x > div:not([role="group"]) { width: min(84vw, 24rem); }
+
+.snap-x h3 { overflow-wrap: normal; word-break: normal; font-size: clamp(1.5rem, 6vw, 3.75rem); }
+
+@media (min-width: 768px) {
+  .snap-x > div:not([role="group"]) { width: calc((100% - 2.5rem) / 3); }
+}
+
 html { scroll-behavior: smooth; }
 
 body {
